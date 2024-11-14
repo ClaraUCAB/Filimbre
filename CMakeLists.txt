@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.31.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.22.0 FATAL_ERROR)
 
 
 ######## Project information ########
@@ -44,14 +44,16 @@ endif()
 
 ### Project Sources ###
 set(PROJECT_HEADERS
+    include/listas.h
     include/linea.h
     include/documento.h
 )
 
 set(PROJECT_SOURCES
-   src/main.cpp
-   src/linea.cpp
-   src/documento.cpp
+    src/main.cpp
+    src/listas.cpp
+    src/linea.cpp
+    src/documento.cpp
 )
 
 
