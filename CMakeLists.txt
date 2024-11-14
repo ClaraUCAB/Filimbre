@@ -44,18 +44,12 @@ endif()
 
 ### Project Sources ###
 set(PROJECT_HEADERS
-    # include/listas.h
-    # include/pilas.h
-    # include/multilistas.h
     include/linea.h
     include/documento.h
 )
 
 set(PROJECT_SOURCES
    src/main.cpp
-   # src/listas.cpp
-   # src/pilas.cpp
-   # src/multilistas.cpp
    src/linea.cpp
    src/documento.cpp
 )

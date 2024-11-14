@@ -5,6 +5,9 @@
 
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    // Documento *doc = leerDocumento("test.txt");
+    Documento *doc = leerDocumento("nopor_furro.txt");
+    imprimirDocumento(doc);
 }
+
 
