@@ -2,6 +2,7 @@
 
 #include "linea.h"
 #include "documento.h"
+#include "listas.h"
 
 
 int main() {

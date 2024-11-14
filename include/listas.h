@@ -8,7 +8,7 @@ struct Lista {
 };
 
 void insertarEnCabeza(Lista **p, int x);
-void insertarEnCola(Lista *p, int x);
+void insertarEnCola(Lista **p, int x);
 
 void buscarPorValor(Lista *p, int x);
 void buscarPorIndice(Lista *p, int n);

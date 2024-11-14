@@ -18,10 +18,32 @@ int contarLineas(Documento *doc) {
     return lineas;
 }
 
+
 int digitos(int n) {
     int d = 1;
     while ((n = n / 10) > 0) d++;
     return d;
+}
+
+
+// Esta función busca una palabra en cada linea
+Lista *buscarPalabraEnDocumento(Documento *doc, std::string palabra) {
+    Lista *lineas = nullptr;
+    Documento *d = doc;
+    int indice = 0;
+
+    while (d) {
+        Linea *l = d->linea;
+
+        if (existePalabra(l, palabra)) {
+            insertarEnCola(&lineas, indice);
+        }
+
+        indice++;
+        d = d->prox;
+    }
+
+    return lineas;
 }
 
 
