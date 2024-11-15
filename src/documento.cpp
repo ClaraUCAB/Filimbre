@@ -19,13 +19,6 @@ int contarLineas(Documento *doc) {
 }
 
 
-int digitos(int n) {
-    int d = 1;
-    while ((n = n / 10) > 0) d++;
-    return d;
-}
-
-
 // Esta función busca una palabra en cada linea
 Lista *buscarPalabraEnDocumento(Documento *doc, std::string palabra) {
     Lista *lineas = nullptr;
@@ -44,6 +37,11 @@ Lista *buscarPalabraEnDocumento(Documento *doc, std::string palabra) {
     }
 
     return lineas;
+}
+
+
+// TODO: Implementar insertarLinea
+void insertarLinea(Documento **doc, Linea *linea, int n) {
 }
 
 
@@ -72,6 +70,7 @@ Documento *leerDocumento(std::string ruta) {
     if (!file.is_open())
         return nullptr;
 
+    // TODO: Encontrar una mejor manera de hacer esto
     Documento *doc = nullptr;
     Linea **linea = nullptr;
     std::string palabra;
