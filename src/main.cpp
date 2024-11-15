@@ -10,7 +10,7 @@ int main() {
     Documento *doc = leerDocumento("nopor_furro.txt");
     imprimirDocumento(doc);
 
-    std::cout << "hola diefo, no quieres teta?";
+    std::cout << "hola piripicho, no quieres diefo?";
 }
 
 
