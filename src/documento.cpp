@@ -86,9 +86,11 @@ Documento *leerDocumento(std::string ruta) {
         }
 
         // Fin del documento
-        else if (palabra == "<fd>")
+        else if (palabra == "<fd>") {
             // Devolvemos el documento tal como está
+            file.close();
             return doc;
+        }
 
         // Palabra normal
         else {
@@ -106,12 +108,33 @@ Documento *leerDocumento(std::string ruta) {
     }
 
     // Por si acaso el archivo no contiene un <fd>
+    file.close();
     return doc;
 }
 
 
-void escribirDocumento(Documento *doc) {
+void escribirDocumento(Documento *doc, std::string ruta) {
+    // Tratamos de abrir el archivo
+    std::ofstream file(ruta);
 
+    // Comprobamos si el archivo fue abierto exitosamente
+    if (!file.is_open())
+        return;
+
+    Documento *d = doc;
+    while (d) {
+        Linea *l = d->linea;
+
+        while (l) {
+            file << l->palabra << std::endl;
+            l = l->prox;
+        }
+
+        file << "<fl>" << std::endl;
+        d = d->prox;
+    }
+
+    file << "<fd>" << std::endl;
 }
 
 
