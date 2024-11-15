@@ -11,7 +11,7 @@ int digitos(int n) {
 
 // Limpia la consola independientemente del OS
 void clear() {
-#ifdef WIN32
+#ifdef _WIN32
     system("cls");
 #else
     system("clear");
