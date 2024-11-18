@@ -2,6 +2,7 @@
 #include <string>
 #include "linea.h"
 #include "documento.h"
+#include "utils.h"
 
 
 void interfazMenuPrincipal()
@@ -66,7 +67,7 @@ int main()
     Documento *doc;
     do
     {
-        system("clear");
+        clear();
         interfazMenuPrincipal();
         opcion = pedirEntero("");
         switch (opcion)
@@ -79,7 +80,7 @@ int main()
 
         case 1:
             // leer el documento y si no existe abre uno en blanco.
-            system("clear");
+            clear();
             if (doc != nullptr){
                 std::cout << "se va a borrar el archivo en RAM, quiere continuar? [si/no]: \n";
                 if(siNo()){
@@ -101,30 +102,30 @@ int main()
             }
 
         case 2:
-            system("clear");
+            clear();
             imprimirDocumento(doc);
             std::getline(std::cin, entrada);
             break;
 
         case 3:
-            system("clear");
+            clear();
             break;
 
         case 4:
-            system("clear");
+            clear();
             break;
 
         case 5:
-            system("clear");
+            clear();
             break;
 
         case 6:
-            system("clear");
+            clear();
             Documento *leerDocumento();
             break;
 
         default:
-            system("clear");
+            clear();
             std::cout << "Ingrese una opcion valida\n";
             break;
         }
