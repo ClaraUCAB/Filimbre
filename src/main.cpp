@@ -4,11 +4,22 @@
 #include "documento.h"
 #include "utils.h"
 
+void menu5Lineas(){
+    std::cout << "1- Crear nueva linea \n";
+    std::cout << "2- Insertar linea en posicion deseada \n";
+    std::cout << "3- Mover linea de una posicion a otra \n";
+    std::cout << "4- Eliminar linea deseada \n";
+    std::cout << "0- Volver al menu anterior \n";
+    std::cout << "\n";
+    std::cout << "Elija una opcion \n";
+}
 
 void interfazMenuPrincipal()
 {
     std::cout << "     ______    ____    __     ____    __  ___    ____     ____     ______ \n    / ____/   /  _/   / /    /  _/   /  |/  /   / __ )   / __ \   / ____/\n   / /_       / /    / /     / /    / /|_/ /   / __  |  / /_/ /  / __/   \n  / __/     _/ /    / /___ _/ /    / /  / /   / /_/ /  / _, _/  / /___   \n /_/       /___/   /_____//___/   /_/  /_/   /_____/  /_/ |_|  /_____/   \n";
+    std::cout << "\n",
     std::cout << "Bienvenido al Editor de Texto Filimbre, escoja una opcion: \n";
+    std::cout << "\n";
     std::cout << "1. Leer archivo\n";
     std::cout << "2. Mostrar archivo\n";
     std::cout << "3. Guardar archivo\n";
@@ -118,6 +129,7 @@ int main()
 
         case 5:
             clear();
+            menu5Lineas();
             break;
 
         case 6:
