@@ -17,6 +17,23 @@ void interfazMenuPrincipal()
     std::cout << "0. Salir\n";
 }
 
+bool siNo(){
+    std::string opcion;
+    bool terminar=false;
+    do {
+        std::getline(std::cin, opcion);
+        if (opcion == "si" || opcion == "s"){
+            return true;
+        }
+        else if (opcion == "no" || opcion == "n"){
+        return false;
+        }
+        else{
+            std::cout << "responda con si o no \n";
+        }
+    } while (!terminar);
+}
+
 int pedirEntero(const std::string &pregunta)
 {
     int numero = 0;
@@ -63,13 +80,30 @@ int main()
         case 1:
             // leer el documento y si no existe abre uno en blanco.
             system("clear");
-            doc = leerDocumento("./../prueba.txt");
-            imprimirDocumento(doc);
-            std::getline(std::cin, entrada);
-            break;
+            if (doc != nullptr){
+                std::cout << "se va a borrar el archivo en RAM, quiere continuar? [si/no]: \n";
+                if(siNo()){
+                    std::cout << "indique el nombre del archivo: \n";
+                    std::getline(std::cin, entrada);
+                    doc = leerDocumento(("./../"+entrada));
+                    std::getline(std::cin, entrada);
+                }
+                else{
+                    break;
+                }
+            }
+            else{
+                std::cout << "indique el nombre del archivo: \n";
+                std::getline(std::cin, entrada);
+                doc = leerDocumento(("./../"+entrada));
+                std::getline(std::cin, entrada);
+                break;
+            }
 
         case 2:
             system("clear");
+            imprimirDocumento(doc);
+            std::getline(std::cin, entrada);
             break;
 
         case 3:
