@@ -19,11 +19,31 @@ int contarLineas(Documento *doc) {
     return lineas;
 }
 
-/*int digitos(int n) {
-    int d = 1;
-    while ((n = n / 10) > 0) d++;
-    return d;
-}*/
+
+// Esta función busca una palabra en cada linea
+Lista *buscarPalabraEnDocumento(Documento *doc, std::string palabra) {
+    Lista *lineas = nullptr;
+    Documento *d = doc;
+    int indice = 0;
+
+    while (d) {
+        Linea *l = d->linea;
+
+        if (existePalabra(l, palabra)) {
+            insertarEnCola(&lineas, indice);
+        }
+
+        indice++;
+        d = d->prox;
+    }
+
+    return lineas;
+}
+
+
+// TODO: Implementar insertarLinea
+void insertarLinea(Documento **doc, Linea *linea, int n) {
+}
 
 
 void apendarLinea(Documento **doc, Linea *linea) {
@@ -51,6 +71,7 @@ Documento *leerDocumento(std::string ruta) {
     if (!file.is_open())
         return nullptr;
 
+    // TODO: Encontrar una mejor manera de hacer esto
     Documento *doc = nullptr;
     Linea **linea = nullptr;
     std::string palabra;
@@ -65,9 +86,11 @@ Documento *leerDocumento(std::string ruta) {
         }
 
         // Fin del documento
-        else if (palabra == "<fd>")
+        else if (palabra == "<fd>") {
             // Devolvemos el documento tal como está
+            file.close();
             return doc;
+        }
 
         // Palabra normal
         else {
@@ -85,12 +108,33 @@ Documento *leerDocumento(std::string ruta) {
     }
 
     // Por si acaso el archivo no contiene un <fd>
+    file.close();
     return doc;
 }
 
 
-void escribirDocumento(Documento *doc) {
+void escribirDocumento(Documento *doc, std::string ruta) {
+    // Tratamos de abrir el archivo
+    std::ofstream file(ruta);
 
+    // Comprobamos si el archivo fue abierto exitosamente
+    if (!file.is_open())
+        return;
+
+    Documento *d = doc;
+    while (d) {
+        Linea *l = d->linea;
+
+        while (l) {
+            file << l->palabra << std::endl;
+            l = l->prox;
+        }
+
+        file << "<fl>" << std::endl;
+        d = d->prox;
+    }
+
+    file << "<fd>" << std::endl;
 }
 
 

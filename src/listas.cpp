@@ -13,19 +13,21 @@ void insertarEnCabeza(Lista **p, int x) {
 
 
 // Inserta X al final de la lista P
-void insertarEnCola(Lista *p, int x) {
-    Lista *aux = p;
+void insertarEnCola(Lista **p, int x) {
+    Lista *aux = *p;
 
     Lista *t = new Lista;
     t->valor = x;
     t->prox = nullptr;
 
     // Cubrimos el caso de una lista vacia
-    if (!aux) insertarEnCabeza(&p, x);
+    if (!aux) {
+        insertarEnCabeza(p, x);
+        return;
+    }
 
     // Vamos al penúltimo elemento de la lista
-    else while (aux->prox) aux = aux->prox;
-
+    while (aux->prox) aux = aux->prox;
     aux->prox = t;
 }
 
@@ -61,10 +63,10 @@ void imprimirLista(Lista *p){
 	Lista *t = p;
 
 	while (t) {
-        std::cout << "->[" << t->valor << "]";
+        std::cout << "[" << t->valor << "]->";
 	    t = t->prox;
 	}
 
-    std::cout << "->NULL" << std::endl;
+    std::cout << "NULL" << std::endl;
 }
 

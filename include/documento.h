@@ -2,7 +2,11 @@
 #define __DOCUMENTO_H_
 
 #include "linea.h"
+#include "listas.h"
+#include "utils.h"
+
 #include <fstream>
+
 
 struct Documento {
     Linea *linea;
@@ -12,10 +16,11 @@ struct Documento {
 
 bool documentoVacio(Documento *doc);
 int contarLineas(Documento *doc);
-//int digitos(int n);
 
 void insertarLinea(Documento **doc, Linea *linea, int n);
 void apendarLinea(Documento **doc, Linea *linea);
+
+Lista *buscarPalabraEnDocumento(Documento *doc, std::string);
 
 Documento *leerDocumento(std::string ruta);
 void escribirDocumento(Documento *doc, std::string ruta);
