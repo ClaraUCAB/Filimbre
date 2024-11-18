@@ -66,7 +66,7 @@ int main()
     Documento *doc;
     do
     {
-        
+        system("clear");
         interfazMenuPrincipal();
         opcion = pedirEntero("");
         switch (opcion)
