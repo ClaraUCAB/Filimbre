@@ -19,11 +19,11 @@ int contarLineas(Documento *doc) {
     return lineas;
 }
 
-int digitos(int n) {
+/*int digitos(int n) {
     int d = 1;
     while ((n = n / 10) > 0) d++;
     return d;
-}
+}*/
 
 
 void apendarLinea(Documento **doc, Linea *linea) {

@@ -64,7 +64,7 @@ int main()
 {
     int opcion = 1;
     std::string entrada;
-    Documento *doc;
+    Documento *doc=nullptr;
     do
     {
         clear();
@@ -100,6 +100,7 @@ int main()
                 std::getline(std::cin, entrada);
                 break;
             }
+            break;
 
         case 2:
             clear();

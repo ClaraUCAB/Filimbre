@@ -44,16 +44,20 @@ endif()
 
 ### Project Sources ###
 set(PROJECT_HEADERS
+    include/utils.h
     include/listas.h
     include/linea.h
     include/documento.h
+    
 )
 
 set(PROJECT_SOURCES
     src/main.cpp
+    src/utils.cpp
     src/listas.cpp
     src/linea.cpp
     src/documento.cpp
+    
 )
 
 
