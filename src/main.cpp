@@ -3,8 +3,10 @@
 #include "linea.h"
 #include "documento.h"
 
+
 void interfazMenuPrincipal()
 {
+    std::cout << "     ______    ____    __     ____    __  ___    ____     ____     ______ \n    / ____/   /  _/   / /    /  _/   /  |/  /   / __ )   / __ \   / ____/\n   / /_       / /    / /     / /    / /|_/ /   / __  |  / /_/ /  / __/   \n  / __/     _/ /    / /___ _/ /    / /  / /   / /_/ /  / _, _/  / /___   \n /_/       /___/   /_____//___/   /_/  /_/   /_____/  /_/ |_|  /_____/   \n";
     std::cout << "Bienvenido al Editor de Texto Filimbre, escoja una opcion: \n";
     std::cout << "1. Leer archivo\n";
     std::cout << "2. Mostrar archivo\n";
@@ -47,7 +49,7 @@ int main()
     Documento *doc;
     do
     {
-        system("clear");
+        
         interfazMenuPrincipal();
         opcion = pedirEntero("");
         switch (opcion)
@@ -60,30 +62,35 @@ int main()
 
         case 1:
             // leer el documento y si no existe abre uno en blanco.
-            
-            doc = leerDocumento("prueba.txt");
+            system("clear");
+            doc = leerDocumento("./../prueba.txt");
             imprimirDocumento(doc);
+            std::getline(std::cin, entrada);
             break;
 
         case 2:
+            system("clear");
             break;
 
         case 3:
+            system("clear");
             break;
 
         case 4:
+            system("clear");
             break;
 
         case 5:
+            system("clear");
             break;
 
         case 6:
-            
+            system("clear");
             Documento *leerDocumento();
             break;
 
         default:
-
+            system("clear");
             std::cout << "Ingrese una opcion valida\n";
             break;
         }
