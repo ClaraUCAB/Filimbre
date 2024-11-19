@@ -35,6 +35,3 @@ compile_commands.json
 *.exe
 *.out
 *.app
-
-# vscode
-*.vscode

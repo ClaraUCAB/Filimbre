@@ -46,6 +46,7 @@ set(PROJECT_HEADERS
     include/linea.h
     include/documento.h
     include/utils.h
+    include/interfaz.h
 )
 
 set(PROJECT_SOURCES
@@ -54,6 +55,7 @@ set(PROJECT_SOURCES
     src/linea.cpp
     src/documento.cpp
     src/utils.cpp
+    src/interfaz.cpp
 )
 
 

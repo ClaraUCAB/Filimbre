@@ -1,8 +1,6 @@
 #include "documento.h"
 #include "utils.h"
 
-#include <iostream>
-
 
 bool documentoVacio(Documento *doc) {
     return doc == nullptr;
@@ -43,8 +41,23 @@ Lista *buscarPalabraEnDocumento(Documento *doc, std::string palabra) {
 }
 
 
-// TODO: Implementar insertarLinea
 void insertarLinea(Documento **doc, Linea *linea, int n) {
+    if (n < 0) return;
+    if (!doc || n-1 > contarLineas(*doc)) {
+        apendarLinea(doc, linea);
+        return;
+    }
+
+    Documento *nuevoDoc = new Documento;
+    nuevoDoc->linea = linea;
+
+    Documento *d = *doc, *aux;
+    int i = 0;
+
+    while (d->prox && i++ < n) d = d->prox;
+    aux = d->prox;
+    d->prox = nuevoDoc;
+    nuevoDoc->prox = aux;
 }
 
 
