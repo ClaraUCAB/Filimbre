@@ -21,8 +21,8 @@ void clear() {
 // Pausa la ejecución de programa independientemente del OS
 void pause() {
     std::cin.clear();
-    std::cin.ignore();
 
     std::cout << "Presione la tecla ENTER para continuar...";
     std::cin.get();
 }
+

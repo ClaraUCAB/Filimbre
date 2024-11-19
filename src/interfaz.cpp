@@ -1,5 +1,9 @@
 #include "interfaz.h"
 #include "documento.h"
+#include "linea.h"
+#include "utils.h"
+
+#include <iostream>
 
 
 void imprimirMenuPrincipal() {
@@ -17,8 +21,35 @@ void imprimirMenuPrincipal() {
 }
 
 
-void menuLeerArchivo() {
+void imprimirEnCuadro(std::string mensaje) {
+    int len = mensaje.length();
 
+    std::cout << "┏";
+    for (int i = 0; i < len; i++) std::cout << "━";
+    std::cout << "┓\n";
+
+    std::cout << "┃ " << mensaje << " ┃\n";
+
+    std::cout << "┗";
+    for (int i = 0; i < len; i++) std::cout << "━";
+    std::cout << "┛\n";
+}
+
+
+void menuLeerArchivo(Documento **doc) {
+    std::string entrada;
+
+    if (*doc != nullptr) {
+        std::cout << "se va a borrar el archivo en RAM, quiere continuar? [si/no]: \n";
+        if(!preguntarSiNo()) {
+            return;
+        }
+    }
+
+    std::cout << "indique el nombre del archivo: ";
+    std::getline(std::cin, entrada);
+
+    *doc = leerDocumento(entrada);
 }
 
 
@@ -48,15 +79,66 @@ void menuGuardarArchivoComo(Documento *doc) {
 }
 
 
-void menuLineas() {
-    std::cout << "1- Crear nueva linea \n";
-    std::cout << "2- Insertar linea en posicion deseada \n";
-    std::cout << "3- Mover linea de una posicion a otra \n";
-    std::cout << "4- Eliminar linea deseada \n";
-    std::cout << "0- Volver al menu anterior \n";
-    std::cout << "\n";
-    std::cout << "Elija una opcion \n";
-    std::cout << "\n";
+void menuLineas(Documento *doc) {
+    Linea *linea = nullptr;
+
+    clear();
+
+    while (true) {
+        std::cout << "Linea: ";
+        imprimirLinea(linea);
+        std::cout << "\n";
+
+        std::cout << "1- Crear nueva linea \n";
+        std::cout << "2- Insertar linea en posicion deseada \n";
+        std::cout << "3- Mover linea de una posicion a otra \n";
+        std::cout << "4- Eliminar linea deseada \n";
+        std::cout << "0- Volver al menu anterior \n";
+        std::cout << "\n";
+        std::cout << "Elija una opcion \n";
+
+        int opcion = pedirEntero(">>> ");
+        std::cout << "\n";
+
+        switch (opcion) {
+            // Salir
+            case 0:
+                return;
+
+            // Crear linea
+            case 1:
+                linea = submenuCrearLinea();
+                pause();
+                clear();
+                break;
+
+            // Insertar linea nueva
+            case 2:
+                clear();
+                submenuInsertarLinea(doc, linea);
+                linea = nullptr;
+                clear();
+                break;
+
+            // Mover linea de una pos a otra
+                pause();
+            case 3:
+                clear();
+                pause();
+                break;
+
+            // Eliminar una linea
+            case 4:
+                clear();
+                pause();
+                break;
+
+            default:
+                clear();
+                imprimirEnCuadro("Ingrese una opción válida");
+                break;
+        }
+    }
 }
 
 
@@ -68,7 +150,42 @@ void menuPalabras(){
     std::cout << "0- Volver al menu anterior \n";
     std::cout << "\n";
     std::cout << "Elija una opcion \n";
-    std::cout << "\n";
+}
+
+
+Linea *submenuCrearLinea() {
+    Linea *linea = new Linea;
+    int cantidad = pedirEntero("Ingrese la cantidad de palabras: ");
+
+    for (int i = 0; i < cantidad; i++) {
+        std::string palabra;
+        std::cin >> palabra;
+        apendarPalabra(&linea, palabra);
+    }
+
+    return linea;
+}
+
+
+void submenuInsertarLinea(Documento *doc, Linea *linea) {
+    if (!linea) {
+        std::cout << "Tiene que crear una linea primero." << std::endl;
+        pause();
+        return;
+    }
+
+    int indice = pedirEntero("Ingrese el indice donde insertar: ");
+    insertarLinea(&doc, linea, indice);
+}
+
+
+void submenuMoverLinea(Linea *linea, int i, int j) {
+
+}
+
+
+void submenuEliminarLinea(Linea *linea, int i) {
+
 }
 
 
@@ -94,7 +211,8 @@ int pedirEntero(const std::string &pregunta) {
     bool termino = false;
     std::string entrada;
     std::cout << pregunta;
-
+    std::cout << std::flush;
+    
     do
     {
         std::getline(std::cin, entrada);

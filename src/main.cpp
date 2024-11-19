@@ -9,12 +9,15 @@ int main() {
     std::string entrada;
     std::string rutaArchivo;
     Documento *doc = nullptr;
-    Lista *lineaNueva = nullptr;
     int opcion;
+
+    clear();
 
     do {
         imprimirMenuPrincipal();
         opcion = pedirEntero(">>> ");
+
+        clear();
 
         switch (opcion) {
             case 0:
@@ -25,77 +28,31 @@ int main() {
 
             case 1:
                 // leer el documento y si no existe abre uno en blanco.
-                clear();
-                if (doc != nullptr){
-                    std::cout << "se va a borrar el archivo en RAM, quiere continuar? [si/no]: \n";
-                    if(preguntarSiNo()){
-                        std::cout << "indique el nombre del archivo: \n";
-                        std::getline(std::cin, entrada);
-                        doc = leerDocumento(("./../"+entrada));
-                        std::getline(std::cin, entrada);
-                    }
-                    else{
-                        break;
-                    }
-                }
-                else{
-                    std::cout << "indique el nombre del archivo: \n";
-                    std::getline(std::cin, entrada);
-                    doc = leerDocumento(("./../"+entrada));
-                    std::getline(std::cin, entrada);
-                    break;
-                }
+                menuLeerArchivo(&doc);
+                pause();
                 break;
 
             case 2:
-                clear();
-                imprimirDocumento(doc);
+                if (!doc) {
+                    std::cout << "Por favor cargue un archivo primero." << std::endl;
+                } else {
+                    imprimirDocumento(doc);
+                }
                 pause();
                 break;
 
             case 3:
-                clear();
                 menuGuardarArchivo(doc, rutaArchivo);
+                pause();
                 break;
 
             case 4:
-                clear();
                 menuGuardarArchivoComo(doc);
+                pause();
                 break;
 
             case 5:  
-                clear();
-                menuLineas();
-                opcion = pedirEntero("");
-                switch (opcion){
-
-                    case 1:
-                        clear();
-                        break;
-
-                    case 2:
-                        clear();
-                        break;
-
-                    case 3:
-                        clear();
-                        break;
-
-                    case 4:
-                        clear();
-                        break;
-
-                    case 0:
-                        clear();
-                        break;
-
-                    default:
-                        clear();
-                        std::cout << " ___________________________\n";
-                        std::cout << "| Ingrese una opcion valida |\n";
-                        std::cout << " ___________________________\n";
-                        break;
-                }
+                menuLineas(doc);
                 break;
 
             case 6:
@@ -122,9 +79,7 @@ int main() {
 
                         default:
                             clear();
-                            std::cout << " ___________________________\n";
-                            std::cout << "| Ingrese una opcion valida |\n";
-                            std::cout << " ___________________________\n";
+                            imprimirEnCuadro("Ingrese una opción válida");
                             break;
                     }
                 }
@@ -134,9 +89,7 @@ int main() {
 
             default:
                 clear();
-                std::cout << " ___________________________\n";
-                std::cout << "| Ingrese una opcion valida |\n";
-                std::cout << " ___________________________\n";
+                imprimirEnCuadro("Ingrese una opción válida");
                 break;
         }
     } 
