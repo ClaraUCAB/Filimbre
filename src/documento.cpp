@@ -1,8 +1,6 @@
 #include "documento.h"
 #include "utils.h"
 
-#include <iostream>
-
 
 bool documentoVacio(Documento *doc) {
     return doc == nullptr;
