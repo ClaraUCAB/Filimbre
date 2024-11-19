@@ -3,9 +3,6 @@
 
 #include "linea.h"
 #include "listas.h"
-#include "utils.h"
-
-#include <fstream>
 
 
 struct Documento {
