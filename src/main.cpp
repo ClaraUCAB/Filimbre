@@ -4,16 +4,6 @@
 #include "documento.h"
 #include "utils.h"
 
-void menu5Lineas(){
-    std::cout << "1- Crear nueva linea \n";
-    std::cout << "2- Insertar linea en posicion deseada \n";
-    std::cout << "3- Mover linea de una posicion a otra \n";
-    std::cout << "4- Eliminar linea deseada \n";
-    std::cout << "0- Volver al menu anterior \n";
-    std::cout << "\n";
-    std::cout << "Elija una opcion \n";
-}
-
 void interfazMenuPrincipal()
 {
     std::cout << "     ______    ____    __     ____    __  ___    ____     ____     ______ \n    / ____/   /  _/   / /    /  _/   /  |/  /   / __ )   / __ \   / ____/\n   / /_       / /    / /     / /    / /|_/ /   / __  |  / /_/ /  / __/   \n  / __/     _/ /    / /___ _/ /    / /  / /   / /_/ /  / _, _/  / /___   \n /_/       /___/   /_____//___/   /_/  /_/   /_____/  /_/ |_|  /_____/   \n";
@@ -27,6 +17,17 @@ void interfazMenuPrincipal()
     std::cout << "5. Lineas\n";
     std::cout << "6. Palabras\n";
     std::cout << "0. Salir\n";
+}
+
+void menu5Lineas(){
+    std::cout << "1- Crear nueva linea \n";
+    std::cout << "2- Insertar linea en posicion deseada \n";
+    std::cout << "3- Mover linea de una posicion a otra \n";
+    std::cout << "4- Eliminar linea deseada \n";
+    std::cout << "0- Volver al menu anterior \n";
+    std::cout << "\n";
+    std::cout << "Elija una opcion \n";
+    std::cout << "\n";
 }
 
 bool siNo(){
@@ -78,7 +79,6 @@ int main()
     Documento *doc=nullptr;
     do
     {
-        clear();
         interfazMenuPrincipal();
         opcion = pedirEntero("");
         switch (opcion)
@@ -127,7 +127,7 @@ int main()
             clear();
             break;
 
-        case 5:
+        case 5:  
             clear();
             menu5Lineas();
             break;
@@ -139,7 +139,9 @@ int main()
 
         default:
             clear();
-            std::cout << "Ingrese una opcion valida\n";
+            std::cout << " ___________________________\n";
+            std::cout << "| Ingrese una opcion valida |\n";
+            std::cout << " ___________________________\n";
             break;
         }
     } while (opcion != 0);
