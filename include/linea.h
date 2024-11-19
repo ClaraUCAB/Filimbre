@@ -18,6 +18,12 @@ void apendarPalabra(Linea **linea, std::string palabra);
 
 bool existePalabra(Linea *linea, std::string palabra);
 
+void sustituirPalabra(
+        Linea **linea,
+        std::string palabra,
+        std::string reemplazo
+);
+
 void eliminarPalabraPorValor(Linea **linea, std::string palabra);
 void eliminarPalabraPorIndice(Linea **linea, int n);
 

@@ -32,13 +32,11 @@ endif()
 
 
 # Define some flags for increased performance
-# NOTE: -pipe does not affect the final binary
-# It only speeds up compilation by avoiding writing temp files
 set(SYSTEM_TUNING_FLAGS "-march=native -mtune=native -pipe -O3")
 
 # Add LTO flags if enabled
 if(ENABLE_LTO)
-   set(SYSTEM_TUNING_FLAGS "${SYSTEM_TUNING_FLAGS} -flto")
+    set(SYSTEM_TUNING_FLAGS "${SYSTEM_TUNING_FLAGS} -flto")
 endif()
 
 
@@ -47,6 +45,7 @@ set(PROJECT_HEADERS
     include/listas.h
     include/linea.h
     include/documento.h
+    include/utils.h
 )
 
 set(PROJECT_SOURCES
@@ -54,6 +53,7 @@ set(PROJECT_SOURCES
     src/listas.cpp
     src/linea.cpp
     src/documento.cpp
+    src/utils.cpp
 )
 
 

@@ -1,4 +1,7 @@
 build/
+.cache
+compile_commands.json
+.vscode
 
 # Prerequisites
 *.d
@@ -32,3 +35,6 @@ build/
 *.exe
 *.out
 *.app
+
+# vscode
+*.vscode

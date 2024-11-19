@@ -1,4 +1,7 @@
 #include "documento.h"
+#include "utils.h"
+
+#include <iostream>
 
 
 bool documentoVacio(Documento *doc) {
@@ -16,13 +19,6 @@ int contarLineas(Documento *doc) {
     }
 
     return lineas;
-}
-
-
-int digitos(int n) {
-    int d = 1;
-    while ((n = n / 10) > 0) d++;
-    return d;
 }
 
 
@@ -47,6 +43,11 @@ Lista *buscarPalabraEnDocumento(Documento *doc, std::string palabra) {
 }
 
 
+// TODO: Implementar insertarLinea
+void insertarLinea(Documento **doc, Linea *linea, int n) {
+}
+
+
 void apendarLinea(Documento **doc, Linea *linea) {
     Documento *nuevoDoc = new Documento;
     nuevoDoc->linea = linea;
@@ -65,18 +66,26 @@ void apendarLinea(Documento **doc, Linea *linea) {
 
 Documento *leerDocumento(std::string ruta) {
     // Tratamos de abrir el archivo
-    std::ifstream file(ruta);
+    FILE *fp = fopen(ruta.c_str(), "r");
 
     // Comprobamos si el archivo fue abierto exitosamente
     // Si no, devolvemos un documento vacio.
-    if (!file.is_open())
+    if (!fp)
         return nullptr;
 
+    // HACK: Encontrar una mejor manera de hacer esto
     Documento *doc = nullptr;
     Linea **linea = nullptr;
+    // std::string palabra;
+    char buffer[9999];
     std::string palabra;
     
-    while (std::getline(file, palabra)) {
+    while (fgets(buffer, 9999, fp)) {
+        // Convertimos la linea en un std::string
+        // También la limpiamos
+        palabra = buffer;
+        palabra = palabra.substr(0, palabra.find("\n"));
+
         // Fin de linea
         if (palabra == "<fl>") {
             // Apendamos la linea como está al
@@ -86,9 +95,11 @@ Documento *leerDocumento(std::string ruta) {
         }
 
         // Fin del documento
-        else if (palabra == "<fd>")
+        else if (palabra == "<fd>") {
             // Devolvemos el documento tal como está
+            fclose(fp);
             return doc;
+        }
 
         // Palabra normal
         else {
@@ -106,12 +117,34 @@ Documento *leerDocumento(std::string ruta) {
     }
 
     // Por si acaso el archivo no contiene un <fd>
+    fclose(fp);
     return doc;
 }
 
 
-void escribirDocumento(Documento *doc) {
+void escribirDocumento(Documento *doc, std::string ruta) {
+    // Tratamos de abrir el archivo
+    FILE *fp = fopen(ruta.c_str(), "w");
 
+    // Comprobamos si el archivo fue abierto exitosamente
+    if (!fp)
+        return;
+
+    Documento *d = doc;
+    while (d) {
+        Linea *l = d->linea;
+
+        while (l) {
+            fputs(l->palabra.c_str(), fp);
+            fputs("\n", fp);
+            l = l->prox;
+        }
+
+        fputs("<fl>\n", fp);
+        d = d->prox;
+    }
+
+    fputs("<fd>\n", fp);
 }
 
 
@@ -122,6 +155,7 @@ void imprimirDocumento(Documento *doc) {
     int margen = digitos(contarLineas(doc));
 
     while (d) {
+        if (nLinea % 25 == 1){pause();}
         int m = margen - digitos(nLinea) + 1;
         imprimirLineaNumerada(d->linea, nLinea++, m);
         d = d->prox;

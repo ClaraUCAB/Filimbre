@@ -7,6 +7,7 @@ struct Lista {
     Lista *prox;
 };
 
+
 void insertarEnCabeza(Lista **p, int x);
 void insertarEnCola(Lista **p, int x);
 
@@ -20,4 +21,3 @@ void imprimirLista(Lista *p);
 
 
 #endif  // LISTAS_H_
-

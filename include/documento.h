@@ -3,7 +3,7 @@
 
 #include "linea.h"
 #include "listas.h"
-#include <fstream>
+
 
 struct Documento {
     Linea *linea;
@@ -13,7 +13,6 @@ struct Documento {
 
 bool documentoVacio(Documento *doc);
 int contarLineas(Documento *doc);
-int digitos(int n);
 
 void insertarLinea(Documento **doc, Linea *linea, int n);
 void apendarLinea(Documento **doc, Linea *linea);
