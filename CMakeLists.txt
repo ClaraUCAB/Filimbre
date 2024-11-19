@@ -36,7 +36,7 @@ set(SYSTEM_TUNING_FLAGS "-march=native -mtune=native -pipe -O3")
 
 # Add LTO flags if enabled
 if(ENABLE_LTO)
-   set(SYSTEM_TUNING_FLAGS "${SYSTEM_TUNING_FLAGS} -flto")
+    set(SYSTEM_TUNING_FLAGS "${SYSTEM_TUNING_FLAGS} -flto")
 endif()
 
 
