@@ -32,8 +32,6 @@ endif()
 
 
 # Define some flags for increased performance
-# NOTE: -pipe does not affect the final binary
-# It only speeds up compilation by avoiding writing temp files
 set(SYSTEM_TUNING_FLAGS "-march=native -mtune=native -pipe -O3")
 
 # Add LTO flags if enabled

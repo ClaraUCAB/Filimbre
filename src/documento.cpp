@@ -1,4 +1,7 @@
 #include "documento.h"
+#include "utils.h"
+
+#include <iostream>
 
 
 bool documentoVacio(Documento *doc) {
@@ -63,19 +66,26 @@ void apendarLinea(Documento **doc, Linea *linea) {
 
 Documento *leerDocumento(std::string ruta) {
     // Tratamos de abrir el archivo
-    std::ifstream file(ruta);
+    FILE *fp = fopen(ruta.c_str(), "r");
 
     // Comprobamos si el archivo fue abierto exitosamente
     // Si no, devolvemos un documento vacio.
-    if (!file.is_open())
+    if (!fp)
         return nullptr;
 
-    // TODO: Encontrar una mejor manera de hacer esto
+    // HACK: Encontrar una mejor manera de hacer esto
     Documento *doc = nullptr;
     Linea **linea = nullptr;
+    // std::string palabra;
+    char buffer[9999];
     std::string palabra;
     
-    while (std::getline(file, palabra)) {
+    while (fgets(buffer, 9999, fp)) {
+        // Convertimos la linea en un std::string
+        // También la limpiamos
+        palabra = buffer;
+        palabra = palabra.substr(0, palabra.find("\n"));
+
         // Fin de linea
         if (palabra == "<fl>") {
             // Apendamos la linea como está al
@@ -87,7 +97,7 @@ Documento *leerDocumento(std::string ruta) {
         // Fin del documento
         else if (palabra == "<fd>") {
             // Devolvemos el documento tal como está
-            file.close();
+            fclose(fp);
             return doc;
         }
 
@@ -107,17 +117,17 @@ Documento *leerDocumento(std::string ruta) {
     }
 
     // Por si acaso el archivo no contiene un <fd>
-    file.close();
+    fclose(fp);
     return doc;
 }
 
 
 void escribirDocumento(Documento *doc, std::string ruta) {
     // Tratamos de abrir el archivo
-    std::ofstream file(ruta);
+    FILE *fp = fopen(ruta.c_str(), "w");
 
     // Comprobamos si el archivo fue abierto exitosamente
-    if (!file.is_open())
+    if (!fp)
         return;
 
     Documento *d = doc;
@@ -125,15 +135,16 @@ void escribirDocumento(Documento *doc, std::string ruta) {
         Linea *l = d->linea;
 
         while (l) {
-            file << l->palabra << std::endl;
+            fputs(l->palabra.c_str(), fp);
+            fputs("\n", fp);
             l = l->prox;
         }
 
-        file << "<fl>" << std::endl;
+        fputs("<fl>\n", fp);
         d = d->prox;
     }
 
-    file << "<fd>" << std::endl;
+    fputs("<fd>\n", fp);
 }
 
 
