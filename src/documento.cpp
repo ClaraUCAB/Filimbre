@@ -155,6 +155,7 @@ void imprimirDocumento(Documento *doc) {
     int margen = digitos(contarLineas(doc));
 
     while (d) {
+        if (nLinea % 25 == 1){pause();}
         int m = margen - digitos(nLinea) + 1;
         imprimirLineaNumerada(d->linea, nLinea++, m);
         d = d->prox;
