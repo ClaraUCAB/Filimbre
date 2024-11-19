@@ -30,6 +30,29 @@ void menu5Lineas(){
     std::cout << "\n";
 }
 
+void menu6Palabras(){
+    std::cout << "1- Buscar palabra \n";
+    std::cout << "2- Eliminar palabra de una linea deseada \n";
+    std::cout << "3- Modificar palabra de una linea deseada \n";
+    std::cout << "4- Sustituir palabra de una linea deseada \n";
+    std::cout << "0- Volver al menu anterior \n";
+    std::cout << "\n";
+    std::cout << "Elija una opcion \n";
+    std::cout << "\n";
+}
+
+/*void crearLinea(Lista ** punteroLinea){
+    Lista *line = new Lista;
+    line = *punteroLinea;
+    line -> valor = 1;
+    insertarEnCola(&line, line -> valor);
+    if (lineaVacia){
+        std::cout << "Cuantas palabras contiene la linea? \n";
+        int x = pedirEntero("");
+        insertarPalabra(&line, );
+    }
+}*/
+
 bool siNo(){
     std::string opcion;
     bool terminar=false;
@@ -72,11 +95,11 @@ int pedirEntero(const std::string &pregunta)
     return numero;
 }
 
-int main()
-{
+int main(){
     int opcion = 1;
     std::string entrada;
     Documento *doc=nullptr;
+    Lista *lineaNueva=nullptr;
     do
     {
         interfazMenuPrincipal();
@@ -130,11 +153,70 @@ int main()
         case 5:  
             clear();
             menu5Lineas();
+            opcion = pedirEntero("");
+            switch (opcion){
+            
+            case 1:
+                clear();
+                break;
+
+            case 2:
+                clear();
+                break;
+
+            case 3:
+                clear();
+                break;
+
+            case 4:
+                clear();
+                break;
+
+            case 0:
+                clear();
+                break;
+            
+            default:
+                clear();
+                std::cout << " ___________________________\n";
+                std::cout << "| Ingrese una opcion valida |\n";
+                std::cout << " ___________________________\n";
+                break;
+            }
             break;
 
         case 6:
             clear();
-            Documento *leerDocumento();
+            menu6Palabras();
+            opcion = pedirEntero("");
+            while (opcion != 0){
+                switch (opcion){
+                case 1:
+                    clear();
+                    break;
+
+                case 2:
+                   clear();
+                    break;
+
+                case 3:
+                    clear();
+                    break;
+
+                case 4:
+                    clear();
+                    break;
+
+                default:
+                    clear();
+                    std::cout << " ___________________________\n";
+                    std::cout << "| Ingrese una opcion valida |\n";
+                    std::cout << " ___________________________\n";
+                    break;
+                }
+            }
+            
+         
             break;
 
         default:
@@ -144,11 +226,6 @@ int main()
             std::cout << " ___________________________\n";
             break;
         }
-    } while (opcion != 0);
+    } 
+    while (opcion != 0);
 }
-
-/*int main() {
-    // Documento *doc = leerDocumento("test.txt");
-    Documento *doc = leerDocumento("nopor_furro.txt");
-    imprimirDocumento(doc);
-} */
