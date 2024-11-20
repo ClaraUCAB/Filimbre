@@ -8,23 +8,23 @@ void imprimirMenuPrincipal();
 void imprimirEnCuadro(std::string mensaje);
 
 // Opciones del menu principal
-void menuLeerArchivo(Documento **doc);
+void menuLeerArchivo(Documento **doc, std::string &ruta);
 void menuGuardarArchivo(Documento *doc, std::string nombreArchivo);
 void menuGuardarArchivoComo(Documento *doc);
-void menuLineas(Documento *doc);
-void menuPalabras();
+void menuLineas(Documento **doc);
+void menuPalabras(Documento **doc);
 
 // Opciones del submenus de lineas
 Linea *submenuCrearLinea();
-void submenuInsertarLinea(Documento *doc, Linea *linea);
-void submenuMoverLinea(Linea *linea, int i, int j);
-void submenuEliminarLinea(Linea *linea, int i);
+void submenuInsertarLinea(Documento **doc, Linea *linea);
+void submenuMoverLinea(Documento **doc);
+void submenuEliminarLinea(Documento **doc);
 
 // Opciones del submenus de palabras
-void submenuBuscarPalabra(Documento *doc, std::string palabra);
-// void submenuEliminarPalabra(Linea *linea, std::string);
-// void submenuModificarPalabra(Linea *linea);
-// void submenuSustituirPalabra(Linea *linea);
+void submenuBuscarPalabra(Documento *doc);
+void submenuEliminarPalabra(Documento **doc);
+void submenuModificarPalabra(Documento **doc);
+void submenuSustituirPalabra(Documento **doc);
 
 
 bool preguntarSiNo();

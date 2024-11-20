@@ -1,5 +1,8 @@
 #include "documento.h"
+#include "linea.h"
 #include "utils.h"
+
+#include <iostream>
 
 
 bool documentoVacio(Documento *doc) {
@@ -41,9 +44,23 @@ Lista *buscarPalabraEnDocumento(Documento *doc, std::string palabra) {
 }
 
 
+Linea *buscarLineaPorIndice(Documento *doc, int i) {
+    if (!doc)
+        return nullptr;
+
+    if (i < 0)
+        return nullptr;
+
+    Documento *d = doc;
+    int j = 0;
+
+    while (d && j++ < i) d = d->prox;
+    return j > i ? d->linea : nullptr;
+}
+
+
 void insertarLinea(Documento **doc, Linea *linea, int n) {
-    if (n < 0) return;
-    if (!doc || n-1 > contarLineas(*doc)) {
+    if (!doc || n < 1 || n-1 > contarLineas(*doc)) {
         apendarLinea(doc, linea);
         return;
     }
@@ -51,8 +68,15 @@ void insertarLinea(Documento **doc, Linea *linea, int n) {
     Documento *nuevoDoc = new Documento;
     nuevoDoc->linea = linea;
 
+    if (n == 0) {
+        // Insertamos por cabeza
+        nuevoDoc->prox = *doc;
+        *doc = nuevoDoc;
+        return;
+    }
+
     Documento *d = *doc, *aux;
-    int i = 0;
+    int i = 2;
 
     while (d->prox && i++ < n) d = d->prox;
     aux = d->prox;
@@ -74,6 +98,72 @@ void apendarLinea(Documento **doc, Linea *linea) {
     Documento *d = *doc;
     while (d->prox) d = d->prox;
     d->prox = nuevoDoc;
+}
+
+
+void eliminarLinea(Documento **doc, Linea *linea) {
+    Documento *d = *doc;
+    int i = 0;
+
+    while (d) {
+        if (d->linea == linea) {
+            eliminarLineaPorIndice(doc, i);
+            return;
+        }
+
+        i++;
+    }
+}
+
+
+void eliminarLineaPorIndice(Documento **doc, int n) {
+    if (documentoVacio(*doc))
+        return;
+
+    Documento *d = *doc, *aux;
+
+    if (n == 0) {
+        *doc = d->prox;
+        delete d;
+        return;
+    }
+
+    // Nos paramos en el elemento
+    // antes del que queremos borrar
+    while (d->prox && n-->1) d = d->prox;
+
+    if (n == 0) {
+        aux = d->prox;
+        d->prox = aux->prox;
+        delete aux;
+    }
+}
+
+
+void moverLineaPorIndice(Documento **doc, int i, int j) {
+    Linea *linea = buscarLineaPorIndice(*doc, i);
+
+    if (lineaVacia(linea))
+        return;
+
+    Documento *d = *doc, *aux;
+
+    if (i == 0) {
+        *doc = d->prox;
+        insertarLinea(doc, linea, ++j);
+        delete d;
+        return;
+    }
+
+    // Nos paramos en el indice antes
+    for (int a = 0; a < i-1; a++)
+        d = d->prox;
+
+    aux = d->prox;
+    d->prox = aux->prox;
+    delete aux;
+
+    insertarLinea(doc, linea, ++j);
 }
 
 
@@ -158,6 +248,7 @@ void escribirDocumento(Documento *doc, std::string ruta) {
     }
 
     fputs("<fd>\n", fp);
+    fclose(fp);
 }
 
 
@@ -168,7 +259,11 @@ void imprimirDocumento(Documento *doc) {
     int margen = digitos(contarLineas(doc));
 
     while (d) {
-        if (nLinea % 25 == 1){pause();}
+        if (nLinea % 26 == 0) {
+            pause();
+            std::cout << std::endl;
+        }
+
         int m = margen - digitos(nLinea) + 1;
         imprimirLineaNumerada(d->linea, nLinea++, m);
         d = d->prox;

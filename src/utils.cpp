@@ -22,7 +22,7 @@ void clear() {
 void pause() {
     std::cin.clear();
 
-    std::cout << "Presione la tecla ENTER para continuar...";
+    std::cout << "\nPresione la tecla ENTER para continuar...";
     std::cin.get();
 }
 
