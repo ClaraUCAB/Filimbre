@@ -2,6 +2,24 @@
 #include <iostream>
 
 
+bool listaVacia(Lista *lista) {
+    return lista == nullptr;
+}
+
+
+int contarLista(Lista *lista) {
+    Lista *l = lista;
+    int cuenta = 0;
+
+    while (l) {
+        cuenta++;
+        l = l->prox;
+    }
+
+    return cuenta;
+}
+
+
 // Inserta X al comienzo de la lista P
 void insertarEnCabeza(Lista **p, int x) {
     Lista *t = new Lista;
@@ -62,11 +80,14 @@ void eliminarNodo(Lista **p, Lista *k) {
 void imprimirLista(Lista *p){
 	Lista *t = p;
 
-	while (t) {
-        std::cout << "[" << t->valor << "]->";
+	while (t && t->prox) {
+        std::cout << t->valor << ", ";
 	    t = t->prox;
 	}
 
-    std::cout << "NULL" << std::endl;
+    if (t) {
+        std::cout << t->valor << "." << std::endl;
+        std::cout << "." << std::endl;
+    }
 }
 

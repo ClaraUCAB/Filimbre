@@ -8,6 +8,9 @@ struct Lista {
 };
 
 
+bool listaVacia(Lista *lista);
+int contarLista(Lista *lista);
+
 void insertarEnCabeza(Lista **p, int x);
 void insertarEnCola(Lista **p, int x);
 

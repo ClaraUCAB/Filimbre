@@ -53,7 +53,7 @@ void sustituirPalabra(Linea **linea, std::string palabra, std::string reemplazo)
 }
 
 
-// Elimina todas las instancias de una palabra de una linea
+// Elimina la primera instancia de una palabra de una linea
 void eliminarPalabraPorValor(Linea **linea, std::string palabra) {
     if (lineaVacia(*linea))
         return;
@@ -71,6 +71,7 @@ void eliminarPalabraPorValor(Linea **linea, std::string palabra) {
             Linea *aux = l->prox;
             l->prox = aux->prox;
             delete aux;
+            return;
         }
 
         l = l->prox;
