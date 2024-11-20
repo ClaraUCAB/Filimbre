@@ -143,7 +143,8 @@ void eliminarLineaPorIndice(Documento **doc, int n) {
 void moverLineaPorIndice(Documento **doc, int i, int j) {
     Linea *linea = buscarLineaPorIndice(*doc, i);
 
-    if (lineaVacia(linea))
+    // if (lineaVacia(linea))
+    if (i < 0 || i >= contarLineas(*doc))
         return;
 
     Documento *d = *doc, *aux;

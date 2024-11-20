@@ -166,7 +166,7 @@ void submenuInsertarLinea(Documento **doc, Linea *linea) {
         return;
     }
 
-    int indice = pedirEntero("Ingrese el indice donde insertar: ");
+    int indice = pedirEntero("Ingrese el indice donde insertar: ") - 1;
     insertarLinea(doc, linea, indice);
     std::cout << "Línea insertada exitosamente." << std::endl;
 }
@@ -401,14 +401,14 @@ bool preguntarSiNo() {
     std::string opcion;
     do {
         std::getline(std::cin, opcion);
-        if (opcion == "si" || opcion == "s" || opcion == "Si" || opcion == "sI") {
+        if (opcion == "si" || opcion == "s" || opcion == "Si" || opcion == "sI" || opcion == "SI") {
             return true;
         }
-        else if (opcion == "no" || opcion == "n" || opcion == "No" || opcion == "nO") {
+        else if (opcion == "no" || opcion == "n" || opcion == "No" || opcion == "nO" || opcion == "NO") {
             return false;
         }
         else {
-            std::cout << "responda con si o no \n";
+            std::cout << "Responda con si o no \n";
         }
     } while (true);
 }
@@ -434,7 +434,6 @@ int pedirEntero(const std::string &pregunta) {
             std::cerr << "ingrese un numero entero:" << std::endl;
             termino = false;
         }
-        /* code */
     } while (!termino);
     return numero;
 }
