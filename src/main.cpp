@@ -9,6 +9,7 @@ int main() {
     std::string entrada;
     std::string rutaArchivo;
     Documento *doc = nullptr;
+    Linea *linea = nullptr;
     int opcion;
 
     clear();
@@ -58,32 +59,6 @@ int main() {
             case 6:
                 clear();
                 menuPalabras();
-                opcion = pedirEntero("");
-                while (opcion != 0){
-                    switch (opcion){
-                        case 1:
-                            clear();
-                            break;
-
-                        case 2:
-                            clear();
-                            break;
-
-                        case 3:
-                            clear();
-                            break;
-
-                        case 4:
-                            clear();
-                            break;
-
-                        default:
-                            clear();
-                            imprimirEnCuadro("Ingrese una opción válida");
-                            break;
-                    }
-                }
-
 
                 break;
 

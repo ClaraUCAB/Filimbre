@@ -50,6 +50,7 @@ void menuLeerArchivo(Documento **doc) {
     std::getline(std::cin, entrada);
 
     *doc = leerDocumento(entrada);
+
 }
 
 
@@ -141,15 +142,65 @@ void menuLineas(Documento *doc) {
     }
 }
 
+void menuPalabras(Documento *doc) {
+    Linea *linea = nullptr;
 
-void menuPalabras(){
-    std::cout << "1- Buscar palabra \n";
-    std::cout << "2- Eliminar palabra de una linea deseada \n";
-    std::cout << "3- Modificar palabra de una linea deseada \n";
-    std::cout << "4- Sustituir palabra de una linea deseada \n";
-    std::cout << "0- Volver al menu anterior \n";
-    std::cout << "\n";
-    std::cout << "Elija una opcion \n";
+    clear();
+
+    while (true) {
+        std::cout << "Linea: ";
+        imprimirLinea(linea);
+        std::cout << "\n";
+
+        std::cout << "1- Buscar palabra \n";
+        std::cout << "2- Eliminar palabra de una linea deseada \n";
+        std::cout << "3- Modificar palabra de una linea deseada \n";
+        std::cout << "4- Sustituir palabra de una linea deseada \n";
+        std::cout << "0- Volver al menu anterior \n";
+        std::cout << "\n";
+        std::cout << "Elija una opcion \n";
+
+        int opcion = pedirEntero(">>> ");
+        std::cout << "\n";
+
+        switch (opcion) {
+            // Salir
+            case 0:
+                return;
+
+            // Imprimir lineas donde aparece una palabra
+            case 1:
+                pause();
+                clear();
+                break;
+
+            // Insertar linea nueva
+            case 2:
+                clear();
+                submenuInsertarLinea(doc, linea);
+                linea = nullptr;
+                clear();
+                break;
+
+            // Mover linea de una pos a otra
+                pause();
+            case 3:
+                clear();
+                pause();
+                break;
+
+            // Eliminar una linea
+            case 4:
+                clear();
+                pause();
+                break;
+
+            default:
+                clear();
+                imprimirEnCuadro("Ingrese una opción válida");
+                break;
+        }
+    }
 }
 
 
@@ -230,4 +281,5 @@ int pedirEntero(const std::string &pregunta) {
     } while (!termino);
     return numero;
 }
+
 
