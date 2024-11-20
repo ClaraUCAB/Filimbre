@@ -1,6 +1,6 @@
 #include "documento.h"
 #include "utils.h"
-
+#include <iostream>
 
 bool documentoVacio(Documento *doc) {
     return doc == nullptr;
@@ -168,7 +168,12 @@ void imprimirDocumento(Documento *doc) {
     int margen = digitos(contarLineas(doc));
 
     while (d) {
-        if (nLinea % 25 == 1){pause();}
+        if (nLinea % 26 == 0) {
+            pause();
+            std::cout << std::endl;
+            clear();
+        }
+
         int m = margen - digitos(nLinea) + 1;
         imprimirLineaNumerada(d->linea, nLinea++, m);
         d = d->prox;
