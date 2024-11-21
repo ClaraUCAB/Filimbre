@@ -140,6 +140,17 @@ void eliminarLineaPorIndice(Documento **doc, int n) {
 }
 
 
+void vaciarDocumento(Documento **doc) {
+    Documento *d = *doc;
+
+    while (d) {
+        *doc = d->prox;
+        delete d;
+        d = *doc;
+    }
+}
+
+
 void moverLineaPorIndice(Documento **doc, int i, int j) {
     Linea *linea = buscarLineaPorIndice(*doc, i);
 

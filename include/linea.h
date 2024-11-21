@@ -26,6 +26,7 @@ void sustituirPalabra(
 
 void eliminarPalabraPorValor(Linea **linea, std::string palabra);
 void eliminarPalabraPorIndice(Linea **linea, int n);
+void vaciarLinea(Linea **linea);
 
 void imprimirLinea(Linea *linea);
 void imprimirLineaNumerada(Linea *linea, int n, int m);

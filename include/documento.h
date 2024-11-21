@@ -19,6 +19,7 @@ void apendarLinea(Documento **doc, Linea *linea);
 
 void eliminarLinea(Documento **doc, Linea *linea);
 void eliminarLineaPorIndice(Documento **doc, int n);
+void vaciarDocumento(Documento *doc);
 
 void moverLineaPorIndice(Documento **doc, int i, int j);
 
