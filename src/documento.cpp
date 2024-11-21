@@ -60,7 +60,7 @@ Linea *buscarLineaPorIndice(Documento *doc, int i) {
 
 
 void insertarLinea(Documento **doc, Linea *linea, int n) {
-    if (!doc || n < 1 || n-1 > contarLineas(*doc)) {
+    if (!doc || n < 0 || n-1 > contarLineas(*doc)) {
         apendarLinea(doc, linea);
         return;
     }

@@ -161,6 +161,10 @@ Linea *submenuCrearLinea() {
 
 
 void submenuInsertarLinea(Documento **doc, Linea *linea) {
+    if (documentoVacio(*doc))
+        // std::cout << "Por favor, cree un archivo primero." << std::endl;
+        std::cout << "No hay archivo abierto. Creando uno nuevo." << std::endl;
+
     if (lineaVacia(linea)) {
         std::cout << "Tiene que crear una linea primero." << std::endl;
         return;
@@ -168,7 +172,7 @@ void submenuInsertarLinea(Documento **doc, Linea *linea) {
 
     int indice = pedirEntero("Ingrese el indice donde insertar: ") - 1;
     insertarLinea(doc, linea, indice);
-    std::cout << "Línea insertada exitosamente." << std::endl;
+    std::cout << "Linea insertada exitosamente." << std::endl;
 }
 
 
@@ -316,7 +320,7 @@ void submenuEliminarPalabra(Documento **doc) {
     std::cout << "Ingrese la palabra que quiere eliminar: ";
     std::getline(std::cin, palabra);
 
-    int nLinea = pedirEntero("Ingrese la línea en la que está: ")-1;
+    int nLinea = pedirEntero("Ingrese la línea en la que está: ") - 1;
     Linea *linea = buscarLineaPorIndice(*doc, nLinea);
 
     if (lineaVacia(linea)) {
@@ -339,7 +343,7 @@ void submenuModificarPalabra(Documento **doc) {
     std::cout << "Ingrese la palabra que quiere modificar: ";
     std::getline(std::cin, palabra);
 
-    int nLinea = pedirEntero("Ingrese la línea en la que está: ")-1;
+    int nLinea = pedirEntero("Ingrese la línea en la que está: ") - 1;
     Linea *linea = buscarLineaPorIndice(*doc, nLinea);
 
     if (lineaVacia(linea)) {
@@ -375,7 +379,7 @@ void submenuSustituirPalabra(Documento **doc) {
     std::cout << "Ingrese la palabra que quiere sustituir: ";
     std::getline(std::cin, palabra);
 
-    int nLinea = pedirEntero("Ingrese la línea en la que está: ")-1;
+    int nLinea = pedirEntero("Ingrese la línea en la que está: ") - 1;
     Linea *linea = buscarLineaPorIndice(*doc, nLinea);
 
     if (lineaVacia(linea)) {
