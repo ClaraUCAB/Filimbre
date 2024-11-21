@@ -102,6 +102,17 @@ void eliminarPalabraPorIndice(Linea **linea, int n) {
 }
 
 
+void vaciarLinea(Linea **linea) {
+    Linea *l = *linea;
+
+    while (l) {
+        *linea = l->prox;
+        delete l;
+        l = *linea;
+    }
+}
+
+
 void imprimirLinea(Linea *linea) {
     if (!linea) {
         std::cout << std::endl;
